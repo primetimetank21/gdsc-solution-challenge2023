@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "192319556201",
+    "firebase_url": "https://finlitt-cb9cb-default-rtdb.firebaseio.com",
+    "project_id": "finlitt-cb9cb",
+    "storage_bucket": "finlitt-cb9cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192319556201:android:fee6939dc3e686806970f8",
+        "android_client_info": {
+          "package_name": "com.example.finlitt_gdsc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192319556201-1a4qf9698j0gcoriaa6k7uelsjfdsg4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwHi2kRAwwXzqlVn7VapzSJC-llFOqGTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192319556201-1a4qf9698j0gcoriaa6k7uelsjfdsg4r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "192319556201-gdnguts1okuok0g0d64e1erobob2uc4r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.finlittGdsc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
