@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:finlitt_gdsc/videoPage.dart';
+import "package:finlitt_gdsc/fill_in_the_blank_quiz.dart";
 
 // Firebase imports
 import 'package:firebase_core/firebase_core.dart';
@@ -12,18 +13,26 @@ Future<void> main() async {
 }
 
 List<Widget> makeListOptions(context) {
-  List listOptions = ["Saving", "Spending", "run", "jump", "sleep", "more?"];
+  List listOptions = ["Saving", "Budgeting", "Investing", "more?"];
   List<Widget> listStuff = [];
   for (var i = 0; i < listOptions.length; i++) {
     listStuff.add(
       TextButton(
         onPressed: () {
           print(listOptions[i]);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => videoPage(listOptions[i]),
-              ));
+          if (listOptions[i] == "Saving") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => fitbQuizPage(),
+                ));
+          } else {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => videoPage(listOptions[i]),
+                ));
+          }
         },
         style: TextButton.styleFrom(
           primary: Colors.black,
