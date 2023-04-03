@@ -1,12 +1,18 @@
+// ignore_for_file: file_names
 class Question {
   final int id, answer;
   final String question;
   final List<String> options;
 
-  Question({this.id, this.question, this.answer, this.options});
+  Question(
+      {required this.id,
+      required this.question,
+      required this.answer,
+      required this.options});
 }
 
-const List sample_data = [
+// ignore: constant_identifier_names
+const List fill_in_the_blank_questions_data = [
   {
     "id": 1,
     "question": "Having a(n) ______ will help you cover an unexpected bill.",
@@ -37,7 +43,7 @@ const List sample_data = [
   {
     "id": 5,
     "question":
-        "A ______ would be better for Jordan since they don’t plan on spending their birthday money now.",
+        "A(n) ______ would be better for Jordan since they don’t plan on spending their birthday money now.",
     "options": ["Checking account", "IOU", "Savings account"],
     "answer_index": 2,
   },
