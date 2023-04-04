@@ -1,10 +1,7 @@
-import 'package:finlitt_gdsc/main.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 import "package:finlitt_gdsc/screens/fill_in_the_blank/models/Questions.dart";
-// import 'package:quiz_app/screens/score/score_screen.dart';
-
 // We use get package for our state management
+import 'package:get/get.dart';
 
 class QuestionController extends GetxController {
   late PageController _pageController;
@@ -74,8 +71,11 @@ class QuestionController extends GetxController {
       _pageController.nextPage(
           duration: const Duration(milliseconds: 250), curve: Curves.ease);
     } else {
+      // Save user's score to Firestore
+      saveScore("fill_in_the_blank", _numOfCorrectAns);
+      print("fill_in_the_blank score: $_numOfCorrectAns");
+
       // Get package provide us simple way to navigate another page
-      print("Correct answers: $_numOfCorrectAns");
       Get.back(result: _numOfCorrectAns);
     }
   }

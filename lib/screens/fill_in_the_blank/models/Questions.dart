@@ -1,4 +1,6 @@
 // ignore_for_file: file_names
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Question {
   final int id, answer;
   final String question;
@@ -9,6 +11,15 @@ class Question {
       required this.question,
       required this.answer,
       required this.options});
+}
+
+/// Saves score to Firestore database
+void saveScore(String quizName, int score) {
+  Map<String, String> quizScore = {
+    "quiz_name": "fill_in_the_blank",
+    "score": score.toString()
+  };
+  FirebaseFirestore.instance.collection("quiz_scores").add(quizScore);
 }
 
 // ignore: constant_identifier_names
