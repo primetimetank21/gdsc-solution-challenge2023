@@ -20,6 +20,7 @@ void saveScore(String quizName, int score) {
     "score": score.toString()
   };
   FirebaseFirestore.instance.collection("quiz_scores").add(quizScore);
+  print("$quizName score: $score");
 }
 
 // ignore: constant_identifier_names
