@@ -1,13 +1,11 @@
+// ignore_for_file: camel_case_types, file_names
+
 import 'package:flutter/material.dart';
-import 'package:finlitt_gdsc/main.dart';
-
-
-
 
 class videoPage extends StatefulWidget {
   //const videoPage({Key? key}) : super(key: key);
-   videoPage(this.thetopic);
-   String thetopic;
+  videoPage(this.thetopic);
+  String thetopic;
 
   //topic=this.thetopic;
   @override
@@ -15,15 +13,13 @@ class videoPage extends StatefulWidget {
 }
 
 class _videoPage extends State<videoPage> {
-   String topic="";
+  String topic = "";
   void initState() {
     //getData();
     setState(() {});
     super.initState();
     setState(() {});
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,6 @@ class _videoPage extends State<videoPage> {
           Center(
             child: Text(
               widget.thetopic,
-
               textScaleFactor: 3,
             ),
           ),
@@ -45,13 +40,7 @@ class _videoPage extends State<videoPage> {
           ),
           Container(
             height: 50,
-
-
-
-
-
           ),
-
         ],
       ),
     );
