@@ -22,20 +22,10 @@ List<Widget> makeListOptions(context) {
     listStuff.add(
       TextButton(
         onPressed: () {
-          // print(listOptions[i]);
           if (listOptions[i] == "Saving") {
             Get.to(fitbQuizPage());
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) => fitbQuizPage(),
-            //     ));
           } else {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => videoPage(listOptions[i]),
-                ));
+            Get.to(videoPage(listOptions[i]));
           }
         },
         style: TextButton.styleFrom(
