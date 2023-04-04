@@ -59,8 +59,8 @@ class QuestionController extends GetxController {
     // It will stop the counter
     update();
 
-    // Once user select an ans after 3s it will go to the next qn
-    Future.delayed(const Duration(seconds: 3), () {
+    // Once user select an ans after 1.5s it will go to the next qn
+    Future.delayed(const Duration(seconds: 1, milliseconds: 500), () {
       nextQuestion();
     });
   }
@@ -73,7 +73,6 @@ class QuestionController extends GetxController {
     } else {
       // Save user's score to Firestore
       saveScore("fill_in_the_blank", _numOfCorrectAns);
-      print("fill_in_the_blank score: $_numOfCorrectAns");
 
       // Get package provide us simple way to navigate another page
       Get.back(result: _numOfCorrectAns);
