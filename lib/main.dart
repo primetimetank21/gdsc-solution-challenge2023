@@ -6,8 +6,7 @@ void main() {
 }
 
 List<Widget> makeListOptions(context) {
-
-  List listOptions = ["Saving", "Spending", "run", "jump","sleep", "more?"];
+  List listOptions = ["Saving", "Spending", "run", "jump", "sleep", "more?"];
   List<Widget> listStuff = [];
   for (var i = 0; i < listOptions.length; i++) {
     listStuff.add(
@@ -17,10 +16,8 @@ List<Widget> makeListOptions(context) {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>  videoPage( listOptions[i]),
+                builder: (context) => videoPage(listOptions[i]),
               ));
-
-
         },
         style: TextButton.styleFrom(
           primary: Colors.black,
@@ -32,20 +29,15 @@ List<Widget> makeListOptions(context) {
             fit: BoxFit.scaleDown,
             child: Padding(
               padding: EdgeInsets.all(10),
-              child:
-              Text(
+              child: Text(
                 listOptions[i],
                 style: TextStyle(
                   fontSize: 40.0,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
-
               ),
-
-
             ),
-
           ),
         ),
       ),
@@ -60,19 +52,12 @@ List<Widget> makeListOptions(context) {
            //setState(() {});
          },
        ),*/
-
-
-
-
-
-
-    )
-    ;
+    );
   }
-
 
   return listStuff;
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -98,26 +83,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class mainScreen extends StatefulWidget {
+  const mainScreen({Key? key}) : super(key: key);
 
-class mainScreen extends StatefulWidget{
-  const mainScreen({Key? key}) : super(key:key);
   @override
-  _mainScreen  createState() => _mainScreen();
-
+  _mainScreen createState() => _mainScreen();
 }
 
-
-class _mainScreen extends State<mainScreen>{
-  Widget build(BuildContext context){
-    return  Scaffold(
-
+class _mainScreen extends State<mainScreen> {
+  Widget build(BuildContext context) {
+    return Scaffold(
       backgroundColor: Colors.green,
       body: GridView.count(
-
         crossAxisCount: 2,
         children: makeListOptions(context),
-
-
       ),
 /*
           GridView.count(
@@ -131,17 +110,9 @@ class _mainScreen extends State<mainScreen>{
 
           ),
     */
-
-
-
-
-
-
-
     );
   }
 }
-
 
 /*child: Text(
     listOptions[i],

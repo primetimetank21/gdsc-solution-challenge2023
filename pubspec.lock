@@ -131,6 +131,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+  network_image_search:
+    dependency: "direct main"
+    description:
+      name: network_image_search
+      sha256: "0f2a41bc43a405c946f08a25d3d4350926f82f8db9b135be1481ed72d49bdcc1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -210,3 +218,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=3.0.0-290.1.beta <4.0.0"
+  flutter: ">=1.17.0"

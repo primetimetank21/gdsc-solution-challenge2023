@@ -34,7 +34,47 @@ class _videoPage extends State<videoPage> {
     super.initState();
     setState(() {});
   }
+  Future<String> getGbt(String theprompt)async {
+  FocusManager.instance.primaryFocus?.unfocus();
 
+  //print("togoooo ${userControl.text}");
+  userReponceList.add(userControl.text);
+  //print(generateText(userControl.text));
+
+  var url =
+  Uri.parse('https://api.openai.com/v1/completions');
+
+  Map<String, String> headers = {
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Charset': 'utf-8',
+    'Authorization': 'Bearer $apiKey'
+  };
+
+  //String promptData =
+  "Run simulation where the kid has \$40. Give the kid things to buy and see if the kid saves or spends their money respond like you are talking to a kid , keep reponses short ${userControl.value.text}";
+
+  String promptData =
+      "Give a list of 6 random items kids buy with their costs as the second seperated by comma not dollar sign that has something to do with the prompt ${theprompt} ";
+
+  print(promptData);
+  final data = jsonEncode({
+    "model": "text-davinci-003",
+    "prompt": promptData,
+    "temperature": 0.1,
+    "max_tokens": 100,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "presence_penalty": 0
+  });
+
+  var response =
+      await http.post(url, headers: headers, body: data);
+  print(response.body);
+
+  final gptData = gptDataFromJson(response.body);
+  print(gptData);
+  return gptData.choices[0].text;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,21 +83,23 @@ class _videoPage extends State<videoPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         //crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Container(height: 50,),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Center(
+                child: Text(
+                  startAmount.toString(),
+                  textScaleFactor: 3,
+                ),
+              ),
+            ],
+          ),
           Expanded(
             child: ListView(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Center(
-                      child: Text(
-                        startAmount.toString(),
-                        textScaleFactor: 3,
-                      ),
-                    ),
-                  ],
-                ),
+
                 Container(
                   height: 100,
                 ),
@@ -81,29 +123,28 @@ class _videoPage extends State<videoPage> {
             child: Text(
               "Choose an item to buy!",
               textScaleFactor: 1,
-
             ),
           ),
-           Column(children: [
 
-           ],),
-
-           Container(
-             height: 100,
-             child:            Expanded(
-             child: ListView.builder(
-
-                 scrollDirection: Axis.horizontal,
-                 shrinkWrap: true,
-                 itemCount: itemsToPick.length,
-                 itemBuilder: (context, i) {
-                   return itemButton(itemsToPick[i]);
-                 }),
-           ),
-           ),
-
-
-          Container(height: 10,),
+          Container(
+            height: 150,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: itemsToPick.length,
+                      itemBuilder: (context, i) {
+                        return itemButton(itemsToPick[i]);
+                      }),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 10,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -164,58 +205,12 @@ class _videoPage extends State<videoPage> {
                   height: 100,
                   child: TextButton(
                     style: TextButton.styleFrom(backgroundColor: Colors.green),
-                    // onPressed: () {
-                    //   FocusManager.instance.primaryFocus?.unfocus();
-                    //
-                    //   //print("togoooo ${userControl.text}");
-                    //   userReponceList.add(userControl.text);
-                    //   print(generateText(userControl.text));
-                    //   setState(() {});
-                    // },
+
                     onPressed: () async {
-                      FocusManager.instance.primaryFocus?.unfocus();
 
-                      //print("togoooo ${userControl.text}");
-                      userReponceList.add(userControl.text);
-                      //print(generateText(userControl.text));
-
-                      var url =
-                          Uri.parse('https://api.openai.com/v1/completions');
-
-                      Map<String, String> headers = {
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Charset': 'utf-8',
-                        'Authorization': 'Bearer $apiKey'
-                      };
-
-                      //String promptData =
-                      "Run simulation where the kid has \$40. Give the kid things to buy and see if the kid saves or spends their money respond like you are talking to a kid , keep reponses short ${userControl.value.text}";
-
-                      String promptData =
-                          "Give a list of 6 random items kids buy with their costs as the second seperated by comma not dollar sign that has something to do with the prompt ${userControl.value.text} ";
-
-                      print(promptData);
-                      final data = jsonEncode({
-                        "model": "text-davinci-003",
-                        "prompt": promptData,
-                        "temperature": 0.1,
-                        "max_tokens": 100,
-                        "top_p": 1,
-                        "frequency_penalty": 0,
-                        "presence_penalty": 0
-                      });
-
-                      var response =
-                          await http.post(url, headers: headers, body: data);
-                      print(response.body);
-
-                      final gptData = gptDataFromJson(response.body);
-                      print(gptData);
-                      GptData gptReponseData;
-
-                      print(gptData.choices[0].text);
-                      gptResponce.add(gptData.choices[0].text);
-                      List a = gptData.choices[0].text.split("\n");
+                      String gbtResponce = await getGbt(userControl.text);
+                      gptResponce.add(gbtResponce);
+                      List a = gbtResponce.split("\n");
 
                       print(a);
                       //itemsToPick= gptData.choices[0].text
