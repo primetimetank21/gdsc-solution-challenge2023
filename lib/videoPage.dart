@@ -208,6 +208,10 @@ class _videoPage extends State<videoPage> {
 
                     onPressed: () async {
 
+
+
+                      
+
                       String gbtResponce = await getGbt(userControl.text);
                       gptResponce.add(gbtResponce);
                       List a = gbtResponce.split("\n");
