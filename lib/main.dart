@@ -17,7 +17,7 @@ Future<void> main() async {
 }
 
 List<Widget> makeListOptions(context) {
-  List listOptions = ["Saving", "Budgeting", "Investing", "more?"];
+  List listOptions = ["Saving", "Budgeting", "Investing", "More?"];
   List<Widget> listStuff = [];
   for (var i = 0; i < listOptions.length; i++) {
     listStuff.add(

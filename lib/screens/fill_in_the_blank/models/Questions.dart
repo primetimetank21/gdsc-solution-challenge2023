@@ -16,7 +16,7 @@ class Question {
 /// Saves score to Firestore database
 void saveScore(String quizName, int score) {
   Map<String, String> quizScore = {
-    "quiz_name": "fill_in_the_blank",
+    "quiz_name": quizName,
     "score": score.toString()
   };
   FirebaseFirestore.instance.collection("quiz_scores").add(quizScore);
