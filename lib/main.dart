@@ -1,9 +1,9 @@
 // ignore_for_file: camel_case_types, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:finlitt_gdsc/videoPage.dart';
 import 'package:finlitt_gdsc/screens/fill_in_the_blank/fill_in_the_blank_quiz.dart';
 import "package:get/get.dart";
+import 'package:finlitt_gdsc/miniBitMain.dart';
 
 // Firebase imports
 import 'package:firebase_core/firebase_core.dart';
@@ -17,7 +17,7 @@ Future<void> main() async {
 }
 
 List<Widget> makeListOptions(context) {
-  List listOptions = ["Saving", "Budgeting", "Investing", "More?"];
+  List listOptions = ["Saving", "Budgeting", "Investing", "MiniBit"];
   List<Widget> listStuff = [];
   for (var i = 0; i < listOptions.length; i++) {
     listStuff.add(
@@ -27,8 +27,8 @@ List<Widget> makeListOptions(context) {
             Get.to(fitbQuizPage());
           } else if (listOptions[i] == "Budgeting") {
             Get.to(MatchingGamePage());
-          } else {
-            Get.to(videoPage(listOptions[i]));
+          } else if (listOptions[i] == "MiniBit") {
+            Get.to(MiniBitPage("MiniBit"));
           }
         },
         style: TextButton.styleFrom(
