@@ -6,18 +6,17 @@ import 'dart:convert';
 import 'openAI.dart';
 import 'selectItemButton.dart';
 
-class videoPage extends StatefulWidget {
-  //const videoPage({Key? key}) : super(key: key);
-  videoPage(this.thetopic);
+class MiniBitPage extends StatefulWidget {
+  MiniBitPage(this.thetopic);
 
   String thetopic;
 
   //topic=this.thetopic;
   @override
-  _videoPage createState() => _videoPage();
+  _MiniBitPage createState() => _MiniBitPage();
 }
 
-class _videoPage extends State<videoPage> {
+class _MiniBitPage extends State<MiniBitPage> {
   String topic = "";
   int startAmount = 50;
   List userReponceList = [];
@@ -86,20 +85,18 @@ class _videoPage extends State<videoPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Center(
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Text(
+                  child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
                   "Plan my spending",
                   textScaleFactor: 2,
-
-                ),)
-              ),
+                ),
+              )),
             ],
           ),
           Text(
             "Type what you want to buy",
             textScaleFactor: 1,
-
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -197,15 +194,13 @@ class _videoPage extends State<videoPage> {
                 ),
               ),
             ],
-          )
-,
+          ),
           Expanded(
             child: ListView(
               children: [
                 Container(
                   height: 100,
                 ),
-
                 Container(
                   height: 50,
                 ),
@@ -241,11 +236,6 @@ class _videoPage extends State<videoPage> {
           Container(
             height: 10,
           ),
-
-
-
-
-
         ],
       ),
     );

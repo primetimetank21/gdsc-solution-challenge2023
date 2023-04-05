@@ -1,36 +1,49 @@
+// ignore_for_file: camel_case_types, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
+import 'package:finlitt_gdsc/screens/fill_in_the_blank/fill_in_the_blank_quiz.dart';
+import "package:get/get.dart";
 import 'package:finlitt_gdsc/miniBitMain.dart';
-void main() {
+
+// Firebase imports
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'matching.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
 List<Widget> makeListOptions(context) {
-  List listOptions = ["Saving", "Spending", "run", "jump", "sleep", "more?"];
+  List listOptions = ["Saving", "Budgeting", "Investing", "MiniBit"];
   List<Widget> listStuff = [];
   for (var i = 0; i < listOptions.length; i++) {
     listStuff.add(
       TextButton(
         onPressed: () {
-          print(listOptions[i]);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => videoPage(listOptions[i]),
-              ));
+          if (listOptions[i] == "Saving") {
+            Get.to(fitbQuizPage());
+          } else if (listOptions[i] == "Budgeting") {
+            Get.to(MatchingGamePage());
+          } else if (listOptions[i] == "MiniBit") {
+            Get.to(MiniBitPage("MiniBit"));
+          }
         },
         style: TextButton.styleFrom(
-          primary: Colors.black,
+          foregroundColor: Colors.black,
         ),
-        child: Container(
+        child: SizedBox(
           height: 100,
           child: FittedBox(
             //fit: BoxFit.fitWidth,
             fit: BoxFit.scaleDown,
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Text(
                 listOptions[i],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 40.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -63,7 +76,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -77,19 +90,23 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: mainScreen(),
+      home: const mainScreen(),
+      routes: {
+        "home": (context) => const mainScreen(),
+        "fitbQuiz": (context) => fitbQuizPage(),
+      },
     );
   }
 }
 
 class mainScreen extends StatefulWidget {
   const mainScreen({Key? key}) : super(key: key);
-
   @override
   _mainScreen createState() => _mainScreen();
 }
 
 class _mainScreen extends State<mainScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
@@ -97,30 +114,6 @@ class _mainScreen extends State<mainScreen> {
         crossAxisCount: 2,
         children: makeListOptions(context),
       ),
-/*
-          GridView.count(
-            crossAxisCount: 2,
-            children: List.generate(6,(index){
-              return Center(child: Text("hi",        style: Theme.of(context).textTheme.headlineSmall,
-              ));
-
-            }),
-
-
-          ),
-    */
     );
   }
 }
-
-/*child: Text(
-    listOptions[i],
-      style: TextStyle(
-        fontSize: 40.0,
-        fontWeight: FontWeight.bold,
-      ),
-      textAlign: TextAlign.center,
-
-  ),
-
- */
