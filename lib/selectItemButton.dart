@@ -33,14 +33,15 @@ class _itemButton extends State<itemButton> {
     };
 
     String promptData =
-        "give steps for the proccess of how to save money for ${theObject} that costs ${thePrice} ";
+        //"give steps for kids for the proccess of how to save money for ${theObject} that costs ${thePrice} ";
+        "steps and tips on how kids can save money to buy ${theObject} that costs ${thePrice}, respond like talking to a kid, don not make response too hard to understand ";
 
     print(promptData);
     final data = jsonEncode({
       "model": "text-davinci-003",
       "prompt": promptData,
       "temperature": 0.1,
-      "max_tokens": 150,
+      "max_tokens": 200,
       "top_p": 1,
       "frequency_penalty": 0,
       "presence_penalty": 0
@@ -133,24 +134,12 @@ class _itemButton extends State<itemButton> {
               )),
           Positioned(
             bottom: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      setState(() {});
-                    },
-                    child: const Text('back'),
-                  ),
-
-                ),
-                Container(
-                  width: 100,
-                ),
-              ],
+            child: TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {});
+              },
+              child:  Text('back'),
             ),
           )
         ],
