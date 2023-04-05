@@ -54,7 +54,10 @@ class QuestionController extends GetxController {
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
 
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
+    if (_correctAns == _selectedAns)
+      _numOfCorrectAns += 10;
+    else
+      _numOfCorrectAns -= 5;
 
     // It will stop the counter
     update();
@@ -75,7 +78,7 @@ class QuestionController extends GetxController {
       saveScore("fill_in_the_blank", _numOfCorrectAns);
 
       // Get package provide us simple way to navigate another page
-      Get.back(result: _numOfCorrectAns);
+      Get.back();
     }
   }
 

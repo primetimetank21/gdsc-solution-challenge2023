@@ -8,6 +8,7 @@ import "package:get/get.dart";
 // Firebase imports
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'matching.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,7 @@ Future<void> main() async {
 }
 
 List<Widget> makeListOptions(context) {
-  List listOptions = ["Saving", "Budgeting", "Investing", "more?"];
+  List listOptions = ["Saving", "Budgeting", "Investing", "More?"];
   List<Widget> listStuff = [];
   for (var i = 0; i < listOptions.length; i++) {
     listStuff.add(
@@ -24,6 +25,8 @@ List<Widget> makeListOptions(context) {
         onPressed: () {
           if (listOptions[i] == "Saving") {
             Get.to(fitbQuizPage());
+          } else if (listOptions[i] == "Budgeting") {
+            Get.to(MatchingGamePage());
           } else {
             Get.to(videoPage(listOptions[i]));
           }
