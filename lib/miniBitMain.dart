@@ -34,24 +34,19 @@ class _videoPage extends State<videoPage> {
     super.initState();
     setState(() {});
   }
-  Future<String> getGbt(String theprompt)async {
+
+  Future<String> getGbt(String theprompt) async {
     FocusManager.instance.primaryFocus?.unfocus();
 
-    //print("togoooo ${userControl.text}");
     userReponceList.add(userControl.text);
-    //print(generateText(userControl.text));
 
-    var url =
-    Uri.parse('https://api.openai.com/v1/completions');
+    var url = Uri.parse('https://api.openai.com/v1/completions');
 
     Map<String, String> headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       'Charset': 'utf-8',
       'Authorization': 'Bearer $apiKey'
     };
-
-    //String promptData =
-    "Run simulation where the kid has \$40. Give the kid things to buy and see if the kid saves or spends their money respond like you are talking to a kid , keep reponses short ${userControl.value.text}";
 
     String promptData =
         "Give a list of 6 random items kids buy with their costs as the second seperated by comma not dollar sign that has something to do with the prompt ${theprompt} ";
@@ -67,14 +62,14 @@ class _videoPage extends State<videoPage> {
       "presence_penalty": 0
     });
 
-    var response =
-    await http.post(url, headers: headers, body: data);
+    var response = await http.post(url, headers: headers, body: data);
     print(response.body);
 
     final gptData = gptDataFromJson(response.body);
     print(gptData);
     return gptData.choices[0].text;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,67 +78,28 @@ class _videoPage extends State<videoPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         //crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(height: 50,),
+          Container(
+            height: 70,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Center(
-                child: Text(
-                  startAmount.toString(),
-                  textScaleFactor: 3,
-                ),
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                  "Plan my spending",
+                  textScaleFactor: 2,
+
+                ),)
               ),
             ],
           ),
-          Expanded(
-            child: ListView(
-              children: [
+          Text(
+            "Type what you want to buy",
+            textScaleFactor: 1,
 
-                Container(
-                  height: 100,
-                ),
-                Center(
-                  child: Text(
-                    widget.thetopic,
-                    textScaleFactor: 3,
-                  ),
-                ),
-                Container(
-                  height: 50,
-                ),
-                Column(
-                  children: makeResponceList(userReponceList, gptResponce),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 30,
-            child: Text(
-              "Choose an item to buy!",
-              textScaleFactor: 1,
-            ),
-          ),
-
-          Container(
-            height: 150,
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: itemsToPick.length,
-                      itemBuilder: (context, i) {
-                        return itemButton(itemsToPick[i]);
-                      }),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 10,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -205,13 +161,7 @@ class _videoPage extends State<videoPage> {
                   height: 100,
                   child: TextButton(
                     style: TextButton.styleFrom(backgroundColor: Colors.green),
-
                     onPressed: () async {
-
-
-
-
-
                       String gbtResponce = await getGbt(userControl.text);
                       gptResponce.add(gbtResponce);
                       List a = gbtResponce.split("\n");
@@ -248,6 +198,49 @@ class _videoPage extends State<videoPage> {
               ),
             ],
           )
+,
+          Expanded(
+            child: ListView(
+              children: [
+                Container(
+                  height: 100,
+                ),
+
+                Container(
+                  height: 50,
+                ),
+                Column(
+                  children: makeResponceList(userReponceList, gptResponce),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 30,
+            child: Text(
+              "Choose an item to buy!",
+              textScaleFactor: 1,
+            ),
+          ),
+          Container(
+            height: 150,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: itemsToPick.length,
+                      itemBuilder: (context, i) {
+                        return itemButton(itemsToPick[i]);
+                      }),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 10,
+          ),
         ],
       ),
     );
@@ -276,7 +269,7 @@ class _videoPage extends State<videoPage> {
       widgetList.add(Padding(
           padding: EdgeInsets.all(20),
           child: Text(
-            "${userResponce[i]}",
+            "You want to buy \"${userResponce[i]}\"",
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
@@ -286,7 +279,7 @@ class _videoPage extends State<videoPage> {
         Padding(
             padding: EdgeInsets.all(20),
             child: Text(
-              "${gptRespond[i]}",
+              "${gptRespond[i].toString().substring(2)}",
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,

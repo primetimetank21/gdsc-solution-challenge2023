@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:network_image_search/network_image_search.dart';
-
+import 'miniBitMain.dart';
 class itemButton extends StatefulWidget {
   itemButton(this.itemInfo);
 
