@@ -174,19 +174,19 @@ class _MatchingGamePageState extends State<MatchingGamePage> {
                   },
                 ),
               ),
-            // if (gameOver)
-            Center(
-              child: ElevatedButton(
-                // style: ButtonStyle(
-                //     textStyle: TextStyle(color: Colors.white),
-                //     backgroundColor: Colors.pink),
-                child: const Text("Home"),
-                onPressed: () {
-                  saveScore("matching", score);
-                  Get.back();
-                },
-              ),
-            )
+            if (gameOver)
+              Center(
+                child: ElevatedButton(
+                  // style: ButtonStyle(
+                  //     textStyle: TextStyle(color: Colors.white),
+                  //     backgroundColor: Colors.pink),
+                  child: const Text("Home"),
+                  onPressed: () {
+                    saveScore("matching", score);
+                    Get.back();
+                  },
+                ),
+              )
           ],
         ),
       ),
