@@ -1,42 +1,28 @@
+import 'package:finlitt_gdsc/screens/fill_in_the_blank/models/Questions.dart';
 import 'package:flutter/material.dart';
 import 'package:finlitt_gdsc/main.dart';
 import 'package:finlitt_gdsc/videoPage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:get/get.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class MatchingGamePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Matching Game",
-      home: HomePage(),
-    );
-  }
+  _MatchingGamePageState createState() => _MatchingGamePageState();
 }
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
+class _MatchingGamePageState extends State<MatchingGamePage> {
+  late List<ItemModel> items;
+  late List<ItemModel> items2;
 
-class _HomePageState extends State<HomePage> {
-  List<ItemModel> items;
-  List<ItemModel> items2;
-
-  int score;
-  bool gameOver;
+  late int score;
+  late bool gameOver;
 
   initGame() {
     gameOver = false;
     score = 0;
     items = [
       ItemModel(
-          vocab: "Buget",
+          vocab: "Budget",
           definition:
               "A plan on how to spend your money to live life within your means"),
       ItemModel(
@@ -53,7 +39,7 @@ class _HomePageState extends State<HomePage> {
           definition:
               "expenses that don't change from month to month (like rent or loan repayments)"),
       ItemModel(
-          vocab: "Varible expenses",
+          vocab: "Variable expenses",
           definition:
               "expenses that change from month to month (like groceries, certain utility bills, or entertainment)"),
       ItemModel(vocab: "Bill", definition: "Cost of an item or service"),
@@ -71,7 +57,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (items.length == 0) gameOver = true;
+    if (items.isEmpty) gameOver = true;
+
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -96,20 +83,20 @@ class _HomePageState extends State<HomePage> {
                       margin: const EdgeInsets.all(8.0),
                       child: Draggable<ItemModel>(
                         data: item,
-                        childWhenDragging: text(
-                          item.text,
-                          color: Colors.grey,
-                          size: 50.0,
+                        childWhenDragging: Text(
+                          item.vocab,
+                          style: const TextStyle(
+                              color: Colors.grey, fontSize: 15.0),
                         ),
-                        feedback: text(
-                          item.text,
-                          color: Colors.teal,
-                          size: 50,
+                        feedback: Text(
+                          item.vocab,
+                          style: const TextStyle(
+                              color: Colors.teal, fontSize: 15.0),
                         ),
                         child: Text(
                           item.vocab,
-                          color: Colors.teal,
-                          size: 50,
+                          style: const TextStyle(
+                              color: Colors.teal, fontSize: 15.0),
                         ),
                       ),
                     );
@@ -119,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       children: items2.map((item) {
                     return DragTarget<ItemModel>(
                       onAccept: (receivedItem) {
-                        if (item.vocab == receivedItem.definition) {
+                        if (item.definition == receivedItem.definition) {
                           setState(() {
                             items.remove(receivedItem);
                             items2.remove(item);
@@ -151,39 +138,55 @@ class _HomePageState extends State<HomePage> {
                         width: 100,
                         alignment: Alignment.center,
                         margin: const EdgeInsets.all(8.0),
-                        child: const Text(
+                        child: Text(
                           item.definition,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18.0),
+                              fontSize: 15.0),
                         ),
                       ),
                     );
                   }).toList()),
                 ],
               ),
+            // if (gameOver)
             if (gameOver)
               const Text(
                 "GameOver",
                 style: TextStyle(
                   color: Colors.red,
-                  fontWeight: FontWeight.bold,
+                  // fontWeight: FontWeight.bold,
                   fontSize: 24.0,
                 ),
               ),
             if (gameOver)
               Center(
                 child: ElevatedButton(
-                  fontColor: Colors.white,
-                  color: Colors.pink,
+                  // style: ButtonStyle(
+                  //     textStyle: TextStyle(color: Colors.white),
+                  //     backgroundColor: Colors.pink),
                   child: const Text("New Game"),
                   onPressed: () {
+                    saveScore("matching", score);
                     initGame();
                     setState(() {});
                   },
                 ),
-              )
+              ),
+            // if (gameOver)
+            Center(
+              child: ElevatedButton(
+                // style: ButtonStyle(
+                //     textStyle: TextStyle(color: Colors.white),
+                //     backgroundColor: Colors.pink),
+                child: const Text("Home"),
+                onPressed: () {
+                  saveScore("matching", score);
+                  Get.back();
+                },
+              ),
+            )
           ],
         ),
       ),
