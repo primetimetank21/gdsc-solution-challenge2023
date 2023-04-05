@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:finlitt_gdsc/videoPage.dart';
-
+import 'package:finlitt_gdsc/miniBitMain.dart';
 void main() {
   runApp(const MyApp());
 }

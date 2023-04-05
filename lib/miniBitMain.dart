@@ -35,45 +35,45 @@ class _videoPage extends State<videoPage> {
     setState(() {});
   }
   Future<String> getGbt(String theprompt)async {
-  FocusManager.instance.primaryFocus?.unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
 
-  //print("togoooo ${userControl.text}");
-  userReponceList.add(userControl.text);
-  //print(generateText(userControl.text));
+    //print("togoooo ${userControl.text}");
+    userReponceList.add(userControl.text);
+    //print(generateText(userControl.text));
 
-  var url =
-  Uri.parse('https://api.openai.com/v1/completions');
+    var url =
+    Uri.parse('https://api.openai.com/v1/completions');
 
-  Map<String, String> headers = {
-    'Content-Type': 'application/json;charset=UTF-8',
-    'Charset': 'utf-8',
-    'Authorization': 'Bearer $apiKey'
-  };
+    Map<String, String> headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Charset': 'utf-8',
+      'Authorization': 'Bearer $apiKey'
+    };
 
-  //String promptData =
-  "Run simulation where the kid has \$40. Give the kid things to buy and see if the kid saves or spends their money respond like you are talking to a kid , keep reponses short ${userControl.value.text}";
+    //String promptData =
+    "Run simulation where the kid has \$40. Give the kid things to buy and see if the kid saves or spends their money respond like you are talking to a kid , keep reponses short ${userControl.value.text}";
 
-  String promptData =
-      "Give a list of 6 random items kids buy with their costs as the second seperated by comma not dollar sign that has something to do with the prompt ${theprompt} ";
+    String promptData =
+        "Give a list of 6 random items kids buy with their costs as the second seperated by comma not dollar sign that has something to do with the prompt ${theprompt} ";
 
-  print(promptData);
-  final data = jsonEncode({
-    "model": "text-davinci-003",
-    "prompt": promptData,
-    "temperature": 0.1,
-    "max_tokens": 100,
-    "top_p": 1,
-    "frequency_penalty": 0,
-    "presence_penalty": 0
-  });
+    print(promptData);
+    final data = jsonEncode({
+      "model": "text-davinci-003",
+      "prompt": promptData,
+      "temperature": 0.1,
+      "max_tokens": 100,
+      "top_p": 1,
+      "frequency_penalty": 0,
+      "presence_penalty": 0
+    });
 
-  var response =
-      await http.post(url, headers: headers, body: data);
-  print(response.body);
+    var response =
+    await http.post(url, headers: headers, body: data);
+    print(response.body);
 
-  final gptData = gptDataFromJson(response.body);
-  print(gptData);
-  return gptData.choices[0].text;
+    final gptData = gptDataFromJson(response.body);
+    print(gptData);
+    return gptData.choices[0].text;
   }
   @override
   Widget build(BuildContext context) {
@@ -210,7 +210,7 @@ class _videoPage extends State<videoPage> {
 
 
 
-                      
+
 
                       String gbtResponce = await getGbt(userControl.text);
                       gptResponce.add(gbtResponce);
